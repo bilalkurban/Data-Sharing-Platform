@@ -65,10 +65,11 @@ if app_mode == "Data Explorer":
     if time_series_mode:
         selected_dates = st.sidebar.multiselect("Select Dates", options=date_options)
     else:
-        # Step 1: Clean and convert OBS_DATE to plain date objects
+        # Convert all dates to native Python datetime.date objects
         date_options = sorted([
-            d if isinstance(d, datetime.date) else d.date()
+            d.to_pydatetime().date() if hasattr(d, 'to_pydatetime') else d
             for d in df['OBS_DATE'].dropna().unique()
+            if isinstance(d, (datetime.date, datetime.datetime, pd.Timestamp))
         ])
         # Step 2: Guard clause — stop if no valid dates
         if not date_options:
