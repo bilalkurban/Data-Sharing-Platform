@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
+# In[3]:
 
 
 #!/usr/bin/env python
@@ -65,15 +65,15 @@ if app_mode == "Data Explorer":
     if time_series_mode:
         selected_dates = st.sidebar.multiselect("Select Dates", options=date_options)
     else:
-        if not isinstance(date_options, list):
-            date_options = list(date_options) if date_options is not None else []
-
+        # Ensure proper conversion to plain date objects
+        date_options = sorted([d if isinstance(d, datetime.date) else d.date() for d in df['OBS_DATE'].dropna().unique()])
+        # Now safely create the selectbox
         selected_date = st.sidebar.selectbox(
             "Select Observation Date",
             options=[""] + date_options,
             format_func=lambda x: x if x != "" else "Select a date"
         )
-    
+
     selected_item = st.sidebar.multiselect("Select Item", options=sorted(df['ITEM'].unique()))
     selected_currency = st.sidebar.multiselect("Select Currency", options=sorted(df['CURRENCY'].unique()))
     selected_maturity = st.sidebar.multiselect("Select Residual Maturity", options=sorted(df['RESIDUAL_MATURITY'].unique()))
