@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[3]:
+# In[5]:
 
 
 #!/usr/bin/env python
@@ -65,9 +65,16 @@ if app_mode == "Data Explorer":
     if time_series_mode:
         selected_dates = st.sidebar.multiselect("Select Dates", options=date_options)
     else:
-        # Ensure proper conversion to plain date objects
-        date_options = sorted([d if isinstance(d, datetime.date) else d.date() for d in df['OBS_DATE'].dropna().unique()])
-        # Now safely create the selectbox
+        # Step 1: Clean and convert OBS_DATE to plain date objects
+        date_options = sorted([
+            d if isinstance(d, datetime.date) else d.date()
+            for d in df['OBS_DATE'].dropna().unique()
+        ])
+        # Step 2: Guard clause — stop if no valid dates
+        if not date_options:
+            st.sidebar.warning("No valid dates found in the dataset.")
+            st.stop()
+        # Step 3: Safe use in selectbox
         selected_date = st.sidebar.selectbox(
             "Select Observation Date",
             options=[""] + date_options,
