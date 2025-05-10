@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[5]:
+# In[7]:
 
 
 #!/usr/bin/env python
@@ -65,22 +65,24 @@ if app_mode == "Data Explorer":
     if time_series_mode:
         selected_dates = st.sidebar.multiselect("Select Dates", options=date_options)
     else:
-        # Convert all dates to native Python datetime.date objects
+        # Clean and convert date options
         date_options = sorted([
             d.to_pydatetime().date() if hasattr(d, 'to_pydatetime') else d
             for d in df['OBS_DATE'].dropna().unique()
             if isinstance(d, (datetime.date, datetime.datetime, pd.Timestamp))
         ])
-        # Step 2: Guard clause — stop if no valid dates
+        # Guard clause
         if not date_options:
             st.sidebar.warning("No valid dates found in the dataset.")
             st.stop()
-        # Step 3: Safe use in selectbox
+        # Use None as the placeholder instead of ""
         selected_date = st.sidebar.selectbox(
             "Select Observation Date",
-            options=[""] + date_options,
-            format_func=lambda x: x if x != "" else "Select a date"
+            options=[None] + date_options,
+            format_func=lambda x: x.strftime("%Y-%m-%d") if isinstance(x, datetime.date) else "Select a date"
         )
+
+
 
     selected_item = st.sidebar.multiselect("Select Item", options=sorted(df['ITEM'].unique()))
     selected_currency = st.sidebar.multiselect("Select Currency", options=sorted(df['CURRENCY'].unique()))
