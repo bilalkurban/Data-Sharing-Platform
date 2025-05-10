@@ -1,6 +1,12 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+# In[1]:
+
+
+#!/usr/bin/env python
+# coding: utf-8
+
 import streamlit as st
 import pandas as pd
 import plotly.express as px
@@ -59,12 +65,15 @@ if app_mode == "Data Explorer":
     if time_series_mode:
         selected_dates = st.sidebar.multiselect("Select Dates", options=date_options)
     else:
+        if not isinstance(date_options, list):
+            date_options = list(date_options) if date_options is not None else []
+
         selected_date = st.sidebar.selectbox(
-            "Select Observation Date", 
-            options=[""] + date_options, 
+            "Select Observation Date",
+            options=[""] + date_options,
             format_func=lambda x: x if x != "" else "Select a date"
         )
-
+    
     selected_item = st.sidebar.multiselect("Select Item", options=sorted(df['ITEM'].unique()))
     selected_currency = st.sidebar.multiselect("Select Currency", options=sorted(df['CURRENCY'].unique()))
     selected_maturity = st.sidebar.multiselect("Select Residual Maturity", options=sorted(df['RESIDUAL_MATURITY'].unique()))
@@ -467,3 +476,34 @@ if "api_request" in st.query_params:
             "count": len(filtered_api_df),
             "timestamp": pd.Timestamp.now().isoformat()
         })
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
