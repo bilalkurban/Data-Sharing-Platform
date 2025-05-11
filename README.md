@@ -17,25 +17,25 @@ REQUIREMENTS
 Python 3.9 or above
 
 Install dependencies:
-
+```
 pip install -r requirements.txt
+```
 
 **requirements.txt**
-
+```
 streamlit
-
 pandas
-
 plotly
-
 openpyxl
+```
 
 USAGE
 -----
 To run locally:
 
+```
 streamlit run app.py
-
+```
 
 To deploy on Streamlit Cloud:
 1. Push this repository to GitHub
@@ -68,4 +68,3 @@ Streamlit-powered open data prototype (May 2025)
 LICENSE
 -------
 Internal use. Please consult with the Central Bank of Malta for reuse permissions.
-
