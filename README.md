@@ -1,9 +1,9 @@
-DATA DISSEMINATION PLATFORM
+Data Dissemination Platform
 ===========================
 
 This repository contains a Streamlit application designed to support interactive data exploration, visualization, download, and API access for reserve assets or similar financial datasets. Developed for the Central Bank of Malta, the tool simplifies access to structured and clean data for both internal and external users.
 
-KEY FEATURES
+Key Features
 ------------
 - Filterable interface by observation date, currency, item, and maturity
 - Time-series mode and multiple chart options (Bar, Column, Line, Pie)
@@ -12,7 +12,7 @@ KEY FEATURES
 - Simulated API server documentation and integration examples
 - API key generation and basic API usage tracking (session-based)
 
-REQUIREMENTS
+Requirements
 ------------
 Python 3.9 or above
 
@@ -29,7 +29,7 @@ plotly
 openpyxl
 ```
 
-USAGE
+Usage
 -----
 To run locally:
 
@@ -43,13 +43,13 @@ To deploy on Streamlit Cloud:
 3. Connect your GitHub and deploy this repo
 4. Upload or link to your Excel data file (replace 'your_data_file.xlsx')
 
-EXPECTED FILES
+Expected Files
 --------------
 - `app.py`               : Main Streamlit application
 - `your_data_file.xlsx`  : Data file (expected on Sheet 3, index 2)
 - `requirements.txt`     : Python dependencies
 
-DATA FILE FORMAT
+Data File Format
 ----------------
 Your Excel file should contain a sheet with the following columns:
 
@@ -59,12 +59,12 @@ Your Excel file should contain a sheet with the following columns:
 - `RESIDUAL_MATURITY`    : Maturity category (e.g., 1Y, 3M)
 - `AMOUNT`               : Numeric value
 
-CREDITS
+Credits
 -------
-Developed by Bilal Kurban  
+Developed by **Bilal Kurban**  
 For: Central Bank of Malta Statistics Department  
 Streamlit-powered open data prototype (May 2025)
 
-LICENSE
+License
 -------
 Internal use. Please consult with the Central Bank of Malta for reuse permissions.
